@@ -1,29 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
+import TaurusImg from '../Images/Taurus.png';
 
+const { height, width } = Dimensions.get('window');
 const AboutTaurus = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+        source={require('../Images/backgroundNoStars.png')}
+        style={{
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            flex: 1,
+            resizeMode: 'cover',
+            resizeMode: 'stretch',
+            position: 'absolute'
+        }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Taurus</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Bull </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Bull </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Earth </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Earth </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Venus </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Venus </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> April 20th - May 20th </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> April 20th - May 20th </Text>
             </View>
             
             <View style={styles.row1}>
@@ -39,12 +53,18 @@ const AboutTaurus = () => {
                 <Text style={styles.paragraph}>
                 Although hard-working, their fixed and comfort-loving nature sometimes makes them appear lazy. This is only because they separate work and leisure so well. When they work, they work hard, and when they play, they don’t really “play” as such…they relax. A Solar Taurus who has kicked his or her feet up is rooted there–you’d be hard-pressed to get them to move. On a mental level, you’ll likely have the same problem. Taureans stick with things and ideas, and therein lies one of the reasons why they are known for their stubbornness. Taurus is a fixed sign, and they have a fair measure of tradition and steadiness in their make-up that keeps them rooted.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text style={{
+                     margin: 10,
+                     textAlign: 'center',
+                     fontFamily: 'Palatino',
+                     fontSize: 15,
+                     marginTop: 12,
+                     paddingBottom: 30,
+                     marginBottom: 12
+                }}>
                 The possessiveness associated with Taurus shows up in all areas of life in some way. Taurus likes to own things (and sometimes people). A nice home, a piece of land (this can be modest), a paid-off car, that aquarium mentioned earlier, a couple of pets, maybe a solid business…In love and relationship, there is an earthy kind of possessiveness that may be considered jealousy by some, but there is actually quite a difference between being possessive and being jealous. Taurus natives are rarely jealous and petty. They do, however, think of the people they love as theirs–it adds to their sense of security.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
-
+    
                 {/* MOON SIGN */}
                     {/* <View>
                         <Text style={styles.element}>Moon In Aries</Text>
@@ -60,6 +80,7 @@ const AboutTaurus = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -70,12 +91,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -83,17 +103,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     subHeader: {
         marginTop: 10,
-       marginLeft: 100,
-       fontSize: 20,
-      fontWeight: 'bold'
+        marginLeft: 100,
+        fontSize: 20,
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     }
 })
 export default AboutTaurus

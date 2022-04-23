@@ -1,29 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 const AboutLeo = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+        source={require('../Images/backgroundNoStars.png')}
+        style={{
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            flex: 1,
+            resizeMode: 'cover',
+            resizeMode: 'stretch',
+            position: 'absolute'
+        }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Leo</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Lion </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Lion </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Fire </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Fire </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Sun </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Sun </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> July 23rd - August 22nd </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> July 23rd - August 22nd </Text>
             </View>
             
             <View style={styles.row1}>
@@ -39,11 +52,19 @@ const AboutLeo = () => {
                 <Text style={styles.paragraph}>
                 The worst thing you can do to a Leo is accuse them of bad intentions. Displaying behavior that makes them think you don’t appreciate them runs a close second. These happy, jovial people become mighty hurt when others don’t see them for their noble intentions.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text 
+                style={{
+                    margin: 10,
+                    textAlign: 'center',
+                    fontFamily: 'Palatino',
+                    fontSize: 15,
+                    marginTop: 12,
+                    paddingBottom: 30,
+                    marginBottom: 12
+               }}
+                >
                 Loyal, and sometimes rather traditional, Leos are, after all, a fixed sign. They’ll hold on to situations and people for a very long time before they give up. There is an unmistakable idealism to Leo’s view of the world and the people in it. Often, Leos have a very noble inner code that they answer to. Although on the surface, Leos appear rather confident, they can actually be some of the most humble souls around. They are the first to blame themselves when something goes wrong. Once again, it’s the Leonine self-importance at work, and this characteristic works in unexpected ways. Instead of being the conceited, self-absorbed show-offs of reputation, they are usually very self-aware, self-conscious, and, yes, even humble.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
 
                 {/* MOON SIGN */}
                     {/* <View>
@@ -60,6 +81,7 @@ const AboutLeo = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -70,12 +92,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -83,17 +104,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     },
     subHeader: {
         marginTop: 10,
         marginLeft: 100,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutLeo

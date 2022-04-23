@@ -2,10 +2,11 @@ import React, { useState, useRef } from 'react';
 import { StyleSheet, Dimensions, ImageBackground, Text, View, Image, Alert, Modal, Button, Pressable, TextInput, ScrollView, SafeAreaView } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import arrow from '../Images/arrowLeftBk.png';
 
 const { height, width } = Dimensions.get('window');
 const CreateBirthChart = ({ navigation }) => {
-    
+
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [open, setOpen] = useState(false);
@@ -298,85 +299,130 @@ const CreateBirthChart = ({ navigation }) => {
                                 <View style={styles.centeredView}>
                                     <View style={styles.modalView}>
                                         <View>
-                                            <ImageBackground
+                                            {/* <ImageBackground
                                                 source={require('../Images/background.png')}
                                                 style={{
                                                     height: height / 2,
                                                     width: width / 1.4,
                                                     borderRadius: 50
                                                 }}
-                                            >
-                                        <View style={styles.ExitModal}>
-                                            <Pressable
-                                                onPress={() => setModalVisible(!modalVisible)}
-                                            >
-                                                <Text>X</Text>
-                                            </Pressable>
-                                        </View>
-                                        <Text>Welcome to {name}'s Birth Chart</Text>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Ascendant is in: </Text>
-                                            <Text>{ascendantSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Sun is in: </Text>
-                                            <Text>{sunSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Moon is in: </Text>
-                                            <Text>{moonSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Mercury is in: </Text>
-                                            <Text>{mercurySign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Venus is in: </Text>
-                                            <Text>{venusSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Mars is in: </Text>
-                                            <Text>{marsSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Jupiter is in: </Text>
-                                            <Text>{jupiterSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Saturn is in: </Text>
-                                            <Text>{saturnSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Uranus is in: </Text>
-                                            <Text>{uranusSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Neptune is in: </Text>
-                                            <Text>{neptuneSign}</Text>
-                                        </View>
-                                        <View style={{ flexDirection: 'row' }}>
-                                            <Text>Your Pluto is in: </Text>
-                                            <Text>{plutoSign}</Text>
-                                        </View>
-                                        {/* <Text style={styles.modalText}>{date}</Text> */}
+                                            > */}
+                                            <View style={styles.ExitModal}>
+                                                <Pressable
+                                                    onPress={() => setModalVisible(!modalVisible)}
+                                                >
+                                                    <Image source={arrow} style={{ height: 15, width: 15 }} />
+                                                </Pressable>
+                                            </View>
+                                            <ScrollView>
 
-                                        <Button
-                                            style={[styles.button, styles.buttonClose]}
-                                            title="Save Birth Chart"
-                                            onPress={() => {
-                                                saveUserInputs();
-                                                setModalVisible(!modalVisible);
-                                                navigation.push('BirthCharts');
-                                                Alert.alert("Birth Chart Saved!");
-                                            }
-                                            }
-                                        // onRequestClose={() => {
-                                        //     setModalVisible(!modalVisible);
-                                        //     Alert.alert("Birth Chart Saved.");
-                                        // }}
-                                        />
+                                                <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', justifyContent: 'space-between' }}>
 
-                                            </ImageBackground>
+                                                    <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 25, marginBottom: 8, alignItems: 'center', justifyContent: 'center' }}>
+                                                        {name}'s Birth Chart</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15, marginBottom: 5 }}
+                                                        >
+                                                            Your Ascendant is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', display: 'flex' }}>{ascendantSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Native's Self, Physical, Character, Appearance</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>
+                                                            Your Sun is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{sunSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Ego, Basic Personality, Consciousness, Vitality, Stamina</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>
+                                                            Your Moon is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{moonSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Unconsciousness, Emotions, Instincts, Habits, Moods</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Mercury is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{mercurySign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Mindful, Commuication, Intellect, Language, Intelligence</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Venus is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{venusSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Attraction, Love, Relationships, Art, Beauty, Harmony</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Mars is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{marsSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Aggression, Sex, Action, Competition, Courage, Passion</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Jupiter is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{jupiterSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Luck, Growth, Expansion, Optimism, Abundance</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Saturn is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{saturnSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Structure, Law, Responsibility, Ambition, Obligation</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Uranus is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{uranusSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Unpredictable, Changes, Rebellion, Reformation</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Neptune is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{neptuneSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Dreams, Intuition, Mysticism, Imagination, Delusion</Text>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Pluto is in: </Text>
+                                                        <Text style={{ fontFamily: 'Palatino-Bold' }}>{plutoSign}</Text>
+                                                    </View>
+                                                    <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                    <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Transformation, Power, Death, Rebirth, Evolution</Text>
+                                                    {/* <Text style={styles.modalText}>{date}</Text> */}
+
+                                                    {/* 
+                                            </ImageBackground> */}
+                                                    {/* <Button
+                                                        style={[styles.button, styles.buttonClose]}
+                                                        title="Save This Birth Chart"
+                                                        onPress={() => {
+                                                            saveUserInputs();
+                                                            setModalVisible(!modalVisible);
+                                                            navigation.push('BirthCharts');
+                                                            Alert.alert("Birth Chart Saved!");
+                                                        }
+                                                        }
+                                                    // onRequestClose={() => {
+                                                    //     setModalVisible(!modalVisible);
+                                                    //     Alert.alert("Birth Chart Saved.");
+                                                    // }}
+                                                    /> */}
+                                                    <Pressable style={({ pressed }) => [styles.btn, {
+                                                        opacity: pressed ? .5 : 1
+                                                    }]}
+                                                        onPress={() => {
+                                                            saveUserInputs();
+                                                            setModalVisible(!modalVisible);
+                                                            navigation.push('BirthCharts');
+                                                            Alert.alert("Birth Chart Saved!");
+                                                        }}
+                                                    >
+                                                        <Text style={{ color: "white", fontWeight: 'bold', padding: 4, display: 'flex' }}>Save Chart</Text>
+                                                    </Pressable>
+                                                </View>
+                                            </ScrollView>
                                         </View>
                                         {/* <ScrollView> */}
                                         {/* <Text style={styles.modalText}>Welcome to {name}'s Birth Chart!
@@ -390,7 +436,7 @@ const CreateBirthChart = ({ navigation }) => {
                                         {/* <View style={sty}>
 
 </View> */}
-                                        
+
                                         {/* here */}
                                         {/* <Text style={styles.textStyle}>Save Birth Chart</Text> */}
 
@@ -470,11 +516,23 @@ const styles = StyleSheet.create({
         fontFamily: 'Palatino-Bold'
     },
     modalView: {
-        margin: 10,
-        borderRadius: 20,
-        padding: 35,
+        margin: 20,
+        borderRadius: 50,
+        padding: 25,
         alignItems: "center",
-        shadowColor: "#000"
+        backgroundColor: '#9DCFF2',
+        opacity: 1,
+        height: height / 1.9,
+        width: width / 1.2,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+
     },
     input: {
         backgroundColor: 'white',
@@ -498,6 +556,16 @@ const styles = StyleSheet.create({
     natalWheel: {
         height: 100,
         width: 100
+    },
+    btn: {
+        alignItems: 'center',
+        backgroundColor: 'black',
+        borderRadius: 60,
+        paddingVertical: 10,
+        marginHorizontal: 20,
+        marginTop: 18,
+        width: 300,
+        height: 41
     }
 
 })

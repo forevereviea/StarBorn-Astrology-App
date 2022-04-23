@@ -1,29 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 const AboutAquarius = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+        source={require('../Images/backgroundNoStars.png')}
+        style={{
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            flex: 1,
+            resizeMode: 'cover',
+            resizeMode: 'stretch',
+            position: 'absolute'
+        }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Aquarius</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Water-Bearer </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Water-Bearer </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Air </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Air </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Neptune </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Neptune </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> January 20th - February 18th </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> January 20th - February 18th </Text>
             </View>
             
             <View style={styles.row1}>
@@ -45,11 +58,19 @@ const AboutAquarius = () => {
                 <Text style={styles.paragraph}>
                 There is a bit of reformer in Aquarius. They’ll try to get you to see through superficiality, and encourage you to be open and forthright. “Be true to yourself” and “Don’t follow the crowd” are mottos we easily associate with this sign.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text 
+                style={{
+                    margin: 10,
+                    textAlign: 'center',
+                    fontFamily: 'Palatino',
+                    fontSize: 15,
+                    marginTop: 12,
+                    paddingBottom: 30,
+                    marginBottom: 12
+               }}
+                >
                 Aquarians need space and value personal freedom. Any attempt to box them in will likely fail. They’ll happily return the favor, and they will treat people from all walks of life as equals. Equality and fairness are hallmarks of the sign. If you’re quirky and “different”, all the better.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
 
                 {/* MOON SIGN */}
                     {/* <View>
@@ -66,6 +87,7 @@ const AboutAquarius = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -76,12 +98,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -89,17 +110,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     },
     subHeader: {
         marginTop: 10,
         marginLeft: 100,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutAquarius

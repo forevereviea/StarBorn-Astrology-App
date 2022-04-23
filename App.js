@@ -470,110 +470,105 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <ImageBackground
-       style={styles.BackImage}source={require('./Images/background.png')}
-      >
-    {/* <FontAwesomeIcon icon="fa-solid fa-user" /> */}
-    <NavigationContainer>
+    <>
+      <NavigationContainer>
         <Stack.Navigator headerMode={false}>
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{  
-            headerShown: false,  
-          }} 
-        />
-        <Stack.Screen
-          name="CreateAccount"
-          component={CreateAccount}
-        /> 
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-         <Stack.Screen
-          name="Quote"
-          component={Quote}
-        />
-        <Stack.Screen
-          name="WhatIsAstrology"
-          component={WhatIsAstrology}
-        />
-         <Stack.Screen
-          name="AboutPlanets"
-          component={AboutPlanets}
-        />
-        <Stack.Screen
-          name="BirthCharts"
-          component={BirthCharts}
-          options={{ title: 'Birth Charts' }}
-        />
-        <Stack.Screen
-          name="CreateBirthChart"
-          component={CreateBirthChart}
-          options={{ title: 'Create A Birth Chart' }}
-        />
-         <Stack.Screen
-          name="ZodiacSigns"
-          component={ZodiacSigns}
-          options={{ title: 'All Zodiac Signs' }}
-        />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="CreateAccount"
+            component={CreateAccount}
+          />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Quote"
+            component={Quote}
+          />
+          <Stack.Screen
+            name="WhatIsAstrology"
+            component={WhatIsAstrology}
+          />
+          <Stack.Screen
+            name="AboutPlanets"
+            component={AboutPlanets}
+          />
+          <Stack.Screen
+            name="BirthCharts"
+            component={BirthCharts}
+            options={{ title: 'Birth Charts' }}
+          />
+          <Stack.Screen
+            name="CreateBirthChart"
+            component={CreateBirthChart}
+            options={{ title: 'Create A Birth Chart' }}
+          />
+          <Stack.Screen
+            name="ZodiacSigns"
+            component={ZodiacSigns}
+            options={{ title: 'All Zodiac Signs' }}
+          />
 
-    {/* About Zodiac Signs Pages */}
-   <Stack.Screen
-   name="Aries"
-   component={Aries}
-   />
-   <Stack.Screen
-   name="Taurus"
-   component={Taurus}
-   />
-    <Stack.Screen
-   name="Gemini"
-   component={Gemini}
-   />
-   <Stack.Screen
-   name="Cancer"
-   component={Cancer}
-   />
-   <Stack.Screen
-   name="Leo"
-   component={Leo}
-   />
-  <Stack.Screen
-   name="Virgo"
-   component={Virgo}
-   />
-    <Stack.Screen
-   name="Libra"
-   component={Libra}
-   />
-    <Stack.Screen
-   name="Scorpio"
-   component={Scorpio}
-   />
-    <Stack.Screen
-   name="Sag"
-   component={Sag}
-   />
-    <Stack.Screen
-   name="Capricorn"
-   component={Capricorn}
-   />
-    <Stack.Screen
-   name="Aquarius"
-   component={Aquarius}
-   />
-    <Stack.Screen
-   name="Pisces"
-   component={Pisces}
-   />
+          {/* About Zodiac Signs Pages */}
+          <Stack.Screen
+            name="Aries"
+            component={Aries}
+          />
+          <Stack.Screen
+            name="Taurus"
+            component={Taurus}
+          />
+          <Stack.Screen
+            name="Gemini"
+            component={Gemini}
+          />
+          <Stack.Screen
+            name="Cancer"
+            component={Cancer}
+          />
+          <Stack.Screen
+            name="Leo"
+            component={Leo}
+          />
+          <Stack.Screen
+            name="Virgo"
+            component={Virgo}
+          />
+          <Stack.Screen
+            name="Libra"
+            component={Libra}
+          />
+          <Stack.Screen
+            name="Scorpio"
+            component={Scorpio}
+          />
+          <Stack.Screen
+            name="Sag"
+            component={Sag}
+          />
+          <Stack.Screen
+            name="Capricorn"
+            component={Capricorn}
+          />
+          <Stack.Screen
+            name="Aquarius"
+            component={Aquarius}
+          />
+          <Stack.Screen
+            name="Pisces"
+            component={Pisces}
+          />
         </Stack.Navigator>
-    </NavigationContainer>
-      </ImageBackground>
-    </SafeAreaView>
+      </NavigationContainer>
+    </>
   );
 }
 
@@ -581,9 +576,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   }, BackImage: {
-        height: 900,
-        width: 400,
-        resizeMode: 'cover',
-        position: 'absolute'
-      }
+    height: 900,
+    width: 400,
+    resizeMode: 'cover',
+    position: 'absolute'
+  }
 });

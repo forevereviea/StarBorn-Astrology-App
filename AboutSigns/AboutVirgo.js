@@ -1,29 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 const AboutVirgo = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+        source={require('../Images/backgroundNoStars.png')}
+        style={{
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            flex: 1,
+            resizeMode: 'cover',
+            resizeMode: 'stretch',
+            position: 'absolute'
+        }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Virgo</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Maiden </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Maiden </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Earth </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Earth </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Mercury </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Mercury </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> August 23rd - September 22nd </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> August 23rd - September 22nd </Text>
             </View>
             
             <View style={styles.row1}>
@@ -51,11 +64,19 @@ const AboutVirgo = () => {
                 <Text style={styles.paragraph}>
                 Solar Virgos often confuse people when their curiosity is mistaken for passion. The surprising part is that Virgo, although knowledgeable, doesn’t always get its hands dirty. Their willingness to explore is often kept at the intellectual level. However, Virgos are often well-respected and valued in their circles for their loyalty, research skills, willingness to lend a hand, and their excellent powers of observation. They are generally kind and helpful souls who, when appreciated, do everything to make things work.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text 
+                style={{
+                    margin: 10,
+                    textAlign: 'center',
+                    fontFamily: 'Palatino',
+                    fontSize: 15,
+                    marginTop: 12,
+                    paddingBottom: 30,
+                    marginBottom: 12
+               }}
+                >
                 There’s an odd combination of the intellectual and the practical in Virgo that is sometimes mistaken for coolness. In fact, Virgos are often self-effacing and shy. They’ll brush off your compliments quickly and, sometimes, critically; but don’t let that fool you. They need your respect and appreciation. In fact, the happiest Virgos are the ones who feel appreciated and useful. Add plenty of worthwhile projects to keep them busy, and Virgos can be some of the sweetest, kindest people around.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
 
                 {/* MOON SIGN */}
                     {/* <View>
@@ -72,6 +93,7 @@ const AboutVirgo = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -82,12 +104,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -95,17 +116,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     },
     subHeader: {
         marginTop: 10,
         marginLeft: 100,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutVirgo

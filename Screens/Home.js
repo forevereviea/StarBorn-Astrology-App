@@ -1,12 +1,22 @@
 import React from 'react'
-import { Animated, StyleSheet, Text, View, Button, Image, Pressable, ScrollView, SafeAreaView, ImageBackground, TouchableOpacity } from 'react-native';
+import { Animated, StyleSheet, Text, Dimensions, View, Button, Image, Pressable, ScrollView, SafeAreaView, ImageBackground, TouchableOpacity } from 'react-native';
 import menu from '../Images/menu.png';
+
+const {height, width} = Dimensions.get('window');
 const Home = ({ navigation }) => {
     return (
         <>
             <SafeAreaView style={styles.container}>
         <ImageBackground
-         style={styles.BackImage} source={require('../Images/background.png')}>
+         style={{
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            flex: 1,
+            resizeMode: 'cover',
+            resizeMode: 'stretch',
+            position: 'absolute'
+
+        }} source={require('../Images/backgroundLessV.png')}>
 
                 <ScrollView>
                     <View style={{ flexDirection: 'row'}}>

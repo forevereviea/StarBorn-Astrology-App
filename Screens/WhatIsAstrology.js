@@ -32,7 +32,7 @@ const WhatIsAstrology = ({ navigation }) => {
                 justifyContent: 'center', 
                 alignItems: 'center',
                 alignSelf: 'center',
-                padding: 20,
+                padding: 29,
                 backgroundColor: '#9DCFF2',
                 opacity: 0.7,
                 width: width / 1.3,
@@ -40,6 +40,7 @@ const WhatIsAstrology = ({ navigation }) => {
                 marginTop:30,
                 borderRadius: 50
                 }}>
+                    <ScrollView>
                     <Text style={{ opacity:1, color: 'black', fontFamily: 'Palatino', fontSize: 16 }}>Astrology is the study of the connection between
                         celestial activity phenomena and earthly events.
 
@@ -58,6 +59,7 @@ const WhatIsAstrology = ({ navigation }) => {
                         and day but the year, time, and place of your birth. If you know
                         the precise time and location you came into the world, you can
                         create an accurate snapshot of the sky at the time of your birth. </Text>
+                    </ScrollView>
                 </View>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 40}}>

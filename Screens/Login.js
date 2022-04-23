@@ -53,9 +53,11 @@ const Login = ({ navigation }) => {
             <SafeAreaView style={styles.container}>
                 <ImageBackground source={require('../Images/backgroundLessV.png')}
                     style={{
-                        height: height,
-                        width: width,
+                        height: Dimensions.get('window').height,
+                        width: Dimensions.get('window').width,
                         flex: 1,
+                        resizeMode: 'cover',
+                        resizeMode: 'stretch',
                         position: 'absolute'
 
                     }}>

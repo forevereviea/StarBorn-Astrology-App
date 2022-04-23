@@ -1,29 +1,41 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
 
 const AboutPisces = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+        source={require('../Images/backgroundNoStars.png')}
+        style={{
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            flex: 1,
+            resizeMode: 'cover',
+            resizeMode: 'stretch',
+            position: 'absolute'
+        }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Pisces</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Fish </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Fish </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Water </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Water </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Neptune </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Neptune </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> February 19th - March 20th </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> February 19th - March 20th </Text>
             </View>
             
             <View style={styles.row1}>
@@ -48,11 +60,19 @@ const AboutPisces = () => {
                 <Text style={styles.paragraph}>
                 Many Pisces seem almost allergic to things like shopping lists, maps, directions, and instructions, and for some brave souls, even watches — they prefer to feel their way through life than to follow some plan.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text 
+                 style={{
+                    margin: 10,
+                    textAlign: 'center',
+                    fontFamily: 'Palatino',
+                    fontSize: 15,
+                    marginTop: 12,
+                    paddingBottom: 30,
+                    marginBottom: 12
+               }}
+                >
                 We find plenty of artists, poets, and musicians with Sun (and other personal planets) in Pisces. Piscean themes are woven throughout the songs of Billy Corgan of the Smashing Pumpkins and Kurt Cobain of Nirvana, for example.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
 
                 {/* MOON SIGN */}
                     {/* <View>
@@ -69,6 +89,7 @@ const AboutPisces = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -79,12 +100,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -92,17 +112,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     },
     subHeader: {
         marginTop: 10,
-       marginLeft: 100,
-       fontSize: 20,
-      fontWeight: 'bold'
+        marginLeft: 100,
+        fontSize: 20,
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutPisces

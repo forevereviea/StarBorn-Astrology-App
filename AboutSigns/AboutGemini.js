@@ -1,29 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 const AboutGemini = () => {
     return (
         <>
             <SafeAreaView style={styles.container}>
+                <ImageBackground
+                 source={require('../Images/backgroundNoStars.png')}
+                 style={{
+                     height: Dimensions.get('window').height,
+                     width: Dimensions.get('window').width,
+                     flex: 1,
+                     resizeMode: 'cover',
+                     resizeMode: 'stretch',
+                     position: 'absolute'
+                 }}
+                >
+
                 <ScrollView style={styles.ScrollView}>
                     <View>
                         <Text style={styles.HeaderTxt}>Gemini</Text>
                     </View>
                     <View style={styles.row1}>
                         <Text style={styles.element}>Symbol: </Text>
-                        <Text> Ram </Text>
+                        <Text style={{ fontFamily: 'Palatino' }}> Twin </Text>
                     </View>
                     <View style={styles.row1}>
                         <Text style={styles.element}>Element: </Text>
-                        <Text> Twin </Text>
+                        <Text style={{ fontFamily: 'Palatino' }}> Air </Text>
                     </View>
                     <View style={styles.row1}>
                         <Text style={styles.element}>Ruling Planet: </Text>
-                        <Text> Mercury </Text>
+                        <Text style={{ fontFamily: 'Palatino' }}> Mercury </Text>
                     </View>
                     <View style={styles.row1}>
                         <Text style={styles.element}>Birth Dates Range: </Text>
-                        <Text> May 21st - June 21 </Text>
+                        <Text style={{ fontFamily: 'Palatino' }}> May 21st - June 21 </Text>
                     </View>
 
                     <View style={styles.row1}>
@@ -42,13 +55,17 @@ const AboutGemini = () => {
                         <Text style={styles.paragraph}>
                             Geminis often flit about, moving quickly and keeping busy every step of the way. Many people with this position of the Sun have gained quite a bit of knowledge in their lifetimes, but they don’t often possess specialized knowledge. This is because Geminis have relatively short attention spans. Restlessness is especially common with this position of the Sun.
                         </Text>
-                        <Text style={styles.paragraph}>
+                        <Text style={{
+                     margin: 10,
+                     textAlign: 'center',
+                     fontFamily: 'Palatino',
+                     fontSize: 15,
+                     marginTop: 12,
+                     paddingBottom: 30,
+                     marginBottom: 12
+                }}>
                             Usually quite affable, Geminis enjoy the “light” side of life. This tendency to take things lightly makes them quite pleasing to be around, but it can be maddening to people seeking support on the deeper issues in life.
                         </Text>
-                        <Text style={styles.paragraph}>
-                        </Text>
-                        <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                        </View>
 
                         {/* MOON SIGN */}
                         {/* <View>
@@ -65,6 +82,7 @@ const AboutGemini = () => {
                     </View> */}
                     </View>
                 </ScrollView>
+                </ImageBackground>
             </SafeAreaView>
         </>
     )
@@ -75,30 +93,33 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt: {
-        fontSize: 50,
-        marginLeft: 20
+        fontSize:50,
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
         marginLeft: 20,
-        flexDirection: 'row'
+       flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     },
     subHeader: {
         marginTop: 10,
         marginLeft: 100,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutGemini

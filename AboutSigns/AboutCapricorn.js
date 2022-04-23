@@ -1,33 +1,46 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 const AboutCapricorn = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+        source={require('../Images/backgroundNoStars.png')}
+        style={{
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            flex: 1,
+            resizeMode: 'cover',
+            resizeMode: 'stretch',
+            position: 'absolute'
+        }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Capricorn</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Sea-Goat </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Sea-Goat </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Earth </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Earth </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Saturn </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Saturn </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> March 21st - April 19th </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> March 21st - April 19th </Text>
             </View>
             
             <View style={styles.row1}>
-            <Text style={styles.element}>Sun in Capricorn </Text>
+            <Text style={styles.subHeader}>Sun in Capricorn </Text>
             </View>
             <View>
                 <Text style={styles.paragraph}>
@@ -51,11 +64,19 @@ const AboutCapricorn = () => {
                 <Text style={styles.paragraph}>
                 Capricorns are not known for taking too many risks in life. They value the beaten track and things “tried and true”. This is not to say they are stick-in-the-muds — they simply value the hard work laid down by those who’ve been around before them.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text 
+                 style={{
+                    margin: 10,
+                    textAlign: 'center',
+                    fontFamily: 'Palatino',
+                    fontSize: 15,
+                    marginTop: 12,
+                    paddingBottom: 30,
+                    marginBottom: 12
+               }}
+                >
                 Turn to your Capricorn friends for help when you need to really get things done. They’ll have practical advice, and they’ll help you organize and manage your life a little better. Capricorns are generally good with their “word”, dependable, and rather loyal people.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
 
                 {/* MOON SIGN */}
                     {/* <View>
@@ -72,6 +93,7 @@ const AboutCapricorn = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -82,12 +104,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -95,11 +116,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
+    },
+    subHeader: {
+        marginTop: 10,
+        marginLeft: 100,
+        fontSize: 20,
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutCapricorn

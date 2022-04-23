@@ -1,95 +1,110 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Image, Pressable } from 'react-native';
+import { StyleSheet, Dimensions, Text, View, SafeAreaView, ScrollView, TouchableOpacity, Image, Pressable, ImageBackground } from 'react-native';
+
+const { height, width } = Dimensions.get('window');
 
 const ZodiacSigns = ({ navigation }) => {
   return (
    <>
    <SafeAreaView style={styles.container}>
+    <ImageBackground source={require('../Images/background.png')}
+     style={{
+        height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+        flex: 1,
+        resizeMode: 'cover',
+        resizeMode: 'stretch',
+        position: 'absolute'
+    }}
+    >
+
     <ScrollView style={styles.ScrollView}>
         <View>
-            <Text style={styles.ZodiacTitle}>Read About A Zodiac Sign</Text>
-            
+            {/* <Text style={{ fontSize: 50, color: 'white', fontFamily: 'Palatino-Italic', justifyContent: 'center', alignSelf: 'center' }}
+            >Read About A</Text> */}
+            <Text style={{ fontSize: 50, color: 'white', fontFamily: 'Palatino-Italic', justifyContent: 'center', alignSelf: 'center', marginTop: 90 }}>Zodiac Signs</Text>
             <View>
                 <TouchableOpacity style={styles.buttons}>
                 {/* Aries Btn */}
-                <Pressable
+                <TouchableOpacity
                 onPress={() => navigation.navigate("Aries")}
                 >
                 <Image style={styles.AriesLogo} 
                 source={require('../Images/Aries.png')} 
                 /> 
-                    </Pressable>
+                    </TouchableOpacity>
             {/* Taurus Btn */}
-                <Pressable
+                <TouchableOpacity
                onPress={() => navigation.navigate("Taurus")} >
                 <Image style={styles.AriesLogo} source={require('../Images/Taurus.png')} /> 
-                </Pressable>
+                </TouchableOpacity>
                 {/* Gemini Btn */}
-                <Pressable
+                <TouchableOpacity
                 onPress={() => navigation.navigate("Gemini")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Gemini.png')} /> 
-                </Pressable>
+                </TouchableOpacity>
                 </TouchableOpacity>
             </View>
             <View>
                 {/* Cancer Btn */}
                 <TouchableOpacity style={styles.buttons}>
-                    <Pressable
+                    <TouchableOpacity
                     onPress={() => navigation.navigate("Cancer")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Cancer.png')} /> 
-                    </Pressable>
+                    </TouchableOpacity>
                     {/* Leo Btn */}
-                    <Pressable
+                    <TouchableOpacity
                     onPress={() => navigation.navigate("Leo")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Leo.png')} /> 
-                    </Pressable>
+                    </TouchableOpacity>
                     {/* Virgo Btn */}
-                    <Pressable
+                    <TouchableOpacity
                     onPress={() => navigation.navigate("Virgo")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Virgo.png')} /> 
-                    </Pressable>
+                    </TouchableOpacity>
                 </TouchableOpacity>
             </View>
             <View>
                 <TouchableOpacity style={styles.buttons}>
                     {/* Libra Btn */}
-                    <Pressable
+                    <TouchableOpacity
                     onPress={() => navigation.navigate("Libra")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Libra.png')} /> 
-                    </Pressable>
+                    </TouchableOpacity>
                 {/* Scorpio Btn */}
-                <Pressable
+                <TouchableOpacity
                 onPress={() => navigation.navigate("Scorpio")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Scorpio.png')} /> 
-                </Pressable>
+                </TouchableOpacity>
                 {/* Sag Btn */}
-                <Pressable
+                <TouchableOpacity
                 onPress={() => navigation.navigate("Sag")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Sag.png')} /> 
-                </Pressable>
+                </TouchableOpacity>
                 </TouchableOpacity>
             </View>
             <View>
                 <TouchableOpacity style={styles.buttons}>
                     {/* Capricorn Btn */}
-                    <Pressable
+                    <TouchableOpacity
                     onPress={() => navigation.navigate("Capricorn")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Capricorn.png')} /> 
-                    </Pressable>
+                    </TouchableOpacity>
                     {/* Aquarius Btn */}
-                    <Pressable
+                    <TouchableOpacity
                     onPress={() => navigation.navigate("Aquarius")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Aquarius.png')} /> 
-                    </Pressable>
+                    </TouchableOpacity>
                     {/* Pisces Btn */}
-                    <Pressable
+                    <TouchableOpacity
                     onPress={() => navigation.navigate("Pisces")}>
                 <Image style={styles.AriesLogo} source={require('../Images/Pisces.png')} /> 
-                    </Pressable>
+                    </TouchableOpacity>
                 </TouchableOpacity>
             </View>
         </View>
     </ScrollView>
+    </ImageBackground>
    </SafeAreaView>
    </>
   )
@@ -108,11 +123,12 @@ const styles = StyleSheet.create({
         fontSize:25,
         marginBottom: 30
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     buttons: {
-        flexDirection: 'row'
+        marginTop: 30,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems:'center',
+        alignSelf: 'center'
     },
     AriesLogo: {
         height: 100,

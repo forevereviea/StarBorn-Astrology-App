@@ -215,41 +215,52 @@ const BirthCharts = ({ navigation }) => {
                                                         }}
                                                     >
                                                         <View style={styles.centeredView}>
-                                                            <View style={styles.modalView}>
-                                                                <ImageBackground source={require('../Images/background.png')}
-                                                                    style={{
-                                                                        height: height / 2,
-                                                                        width: width / 1.4,
-                                                                        borderRadius: 50
-                                                                    }}
-                                                                    >
-                                                                    <ScrollView>
 
-                                                                        <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }}>
+                                                            <View style={styles.modalView}>
                                                                             <View style={{ flexDirection: 'row' }}>
-                                                                                <TouchableOpacity stye={{ justifyContent: 'space-between'}}
+                                                                                <TouchableOpacity style={{ justifyContent: 'flex-end'}}
                                                                                      onPress={() => setModalVisible(!modalVisible)}
                                                                                 >
                                                                                     <Image source={arrow}
                                                                                     style={{
                                                                                         height:20,
                                                                                         width:20,
-                                                                                        marginRight: 10
+            
                                                                                     }} />
                                                                                 </TouchableOpacity>
-                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 20, marginBottom: 5, alignItems: 'center', justifyContent: 'center' }}>
-                                                                                {item.name}'s Celestial Birth</Text>                                                         
+                                                                                <View style={{ width: 260 }}></View>
+                                                                                <TouchableOpacity
+                                                                                        onPress={() => {
+                                                                                            removeData(item.name);
+                                                                                            setModalVisible(!modalVisible);
+                                                                                            Alert.alert("Birth Chart has been deleted!");
+                                                                                        }}
+                                                                                    >
+                                                                                        {/* <Text style={styles.textStyle}>Delete Chart</Text> */}
+                                                                                        <Image source={trash} style={{
+                                                                                            height: 20,
+                                                                                            width: 20,
+                                                                                            // marginRight: 60,
+                                                                                            justifyContent: 'flex-end'
+                                                                                        }} />
+                                                                                    </TouchableOpacity>
                                                                             </View>
+                                                                            <ScrollView>
+                                                                        <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', justifyContent: 'space-between' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 25, marginBottom: 8, alignItems: 'center', justifyContent: 'center' }}>
+                                                                                {item.name}'s Birth Chart</Text>                                                         
                                                                             <View style={{ flexDirection: 'row' }}>
                                                                                 <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15, marginBottom: 5 }}>Your Ascendant is in: </Text>
                                                                                 <Text style={{ fontFamily: 'Palatino-Bold', display: 'flex' }}>{ascendantSign}</Text>
                                                                             </View>
+                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Native's Self, Physical, Character, Appearance</Text>
                                                                             <View style={{ flexDirection: 'row' }}>
                                                                                 <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Sun is in: </Text>
                                                                                 <Text style={{ fontFamily: 'Palatino-Bold' }}>{sunSign}</Text>
                                                                             </View>
                                                                             <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Ego, Basic Personality, Consciousness, Vitality,Stamina</Text>
+                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Ego, Basic Personality, Consciousness, Vitality, Stamina</Text>
                                                                             <View style={{ flexDirection: 'row' }}>
                                                                                 <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Moon is in: </Text>
                                                                                 <Text style={{ fontFamily: 'Palatino-Bold' }}>{moonSign}</Text>
@@ -305,45 +316,10 @@ const BirthCharts = ({ navigation }) => {
                                                                             <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
                                                                             <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Transformation, Power, Death, Rebirth, Evolution</Text>
                                                                             <View style={{ flexDirection: 'row' }}>
-
-                                                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
-
-                                                                                    {/* <TouchableOpacity
-                                                                                        style={{
-                                                                                            backgroundColor: '#E5E5E5',
-                                                                                            paddingVertical: 10,
-                                                                                            borderRadius: 50,
-                                                                                            elevation: 2
-                                                                                        }}
-                                                                                        onPress={() => setModalVisible(!modalVisible)}
-                                                                                    >
-                                                                                        <Text style={{
-                                                                                             fontFamily: 'Palatino',
-                                                                                              fontSize: 10
-                                                                                            // backgroundColor: '#D9D0E2' 
-                                                                                        }}>Back</Text>
-                                                                                    </TouchableOpacity> */}
-                                                                                    <TouchableOpacity
-                                                                                    style={{
-                                                                                        justifyContent: 'flex-end'
-                                                                                    }}
-                                                                                        onPress={() => {
-                                                                                            removeData(item.name);
-                                                                                            setModalVisible(!modalVisible);
-                                                                                            Alert.alert("Birth Chart has been deleted!");
-                                                                                        }}
-                                                                                    >
-                                                                                        {/* <Text style={styles.textStyle}>Delete Chart</Text> */}
-                                                                                        <Image source={trash} style={{
-                                                                                            height: 20,
-                                                                                            width: 20
-                                                                                        }} />
-                                                                                    </TouchableOpacity>
-                                                                                </View>
                                                                             </View>
                                                                         </View>
                                                                     </ScrollView>
-                                                                </ImageBackground>
+                                                                {/* </ImageBackground> */}
                                                                 {/* this one */}
                                                             </View>
                                                         </View>
@@ -416,8 +392,12 @@ const styles = StyleSheet.create({
     modalView: {
         margin: 20,
         borderRadius: 50,
-        padding: 35,
+        padding: 25,
         alignItems: "center",
+        backgroundColor: '#9DCFF2',
+        opacity: 1,
+        height: height / 1.9,
+        width: width / 1.2,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

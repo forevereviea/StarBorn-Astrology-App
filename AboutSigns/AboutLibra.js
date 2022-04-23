@@ -1,29 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 const AboutLibra = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+        source={require('../Images/backgroundNoStars.png')}
+        style={{
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            flex: 1,
+            resizeMode: 'cover',
+            resizeMode: 'stretch',
+            position: 'absolute'
+        }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Libra</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Scales </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Scales </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Air </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Air </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Venus </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Venus </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> September 23 - October 19th </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> September 23 - October 19th </Text>
             </View>
             
             <View style={styles.row1}>
@@ -45,11 +58,19 @@ const AboutLibra = () => {
                 <Text style={styles.paragraph}>
                 Librans are known for comparing and thinking in relative terms, instead of in absolutes. This weekend is not just a good weekend, it’s better than last weekend. These people are always looking for the “best” way or the “right” way to live. Harmony is the ultimate goal, but their idealism and high expectations can mean plenty of discontent. Since life presents all of us with an extraordinary amount of choices, if Libra doesn’t learn to live in the moment at least some of the time, they’ll be in a constant state of unrest.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text 
+                 style={{
+                    margin: 10,
+                    textAlign: 'center',
+                    fontFamily: 'Palatino',
+                    fontSize: 15,
+                    marginTop: 12,
+                    paddingBottom: 30,
+                    marginBottom: 12
+               }}
+                >
                 Society needs rules, and these rules attempt to bring justice, equality, and fairness. On an individual level, Libra represents these laws of civilization. Libra comes across as very civilized and rather refined.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
 
                 {/* MOON SIGN */}
                     {/* <View>
@@ -66,6 +87,7 @@ const AboutLibra = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -76,12 +98,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -89,17 +110,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     },
     subHeader: {
         marginTop: 10,
         marginLeft: 100,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutLibra

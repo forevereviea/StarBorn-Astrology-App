@@ -1,29 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 const AboutScorpio = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+         source={require('../Images/backgroundNoStars.png')}
+         style={{
+             height: Dimensions.get('window').height,
+             width: Dimensions.get('window').width,
+             flex: 1,
+             resizeMode: 'cover',
+             resizeMode: 'stretch',
+             position: 'absolute'
+         }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Scorpio</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Scorpion </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Scorpion </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Water </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Water </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Mars/Pluto </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Mars/Pluto </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> October 23rd - November 21st </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> October 23rd - November 21st </Text>
             </View>
             
             <View style={styles.row1}>
@@ -39,12 +52,19 @@ const AboutScorpio = () => {
                 <Text style={styles.paragraph}>
                 Scorpio isn’t afraid of getting their hands (their bodies, their minds) dirty. The darker side of life intrigues them, and they’re always ready to investigate.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text 
+                 style={{
+                    margin: 10,
+                    textAlign: 'center',
+                    fontFamily: 'Palatino',
+                    fontSize: 15,
+                    marginTop: 12,
+                    paddingBottom: 30,
+                    marginBottom: 12
+               }}
+                >
                 Scorpios simply never give up. They have tremendous staying power. They’re not in the slightest intimidated by anybody or anything. Confrontations are not a problem. In fact, talk to any Scorpio about their lives, and you’ll probably be in awe at all they’ve gone through. Trauma seems to follow them wherever they go. When Scorpio learns optimism, instead of expecting the worst, they’ll find that they possess amazing regenerative powers — the power to heal, create, and transform.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
-
                 {/* MOON SIGN */}
                     {/* <View>
                         <Text style={styles.element}>Moon In Aries</Text>
@@ -60,6 +80,7 @@ const AboutScorpio = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -70,12 +91,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -83,17 +103,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     },
     subHeader: {
         marginTop: 10,
         marginLeft: 100,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutScorpio

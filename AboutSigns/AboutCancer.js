@@ -1,29 +1,42 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView  } from 'react-native';
+import { StyleSheet, Text, View, Button, Pressable, SafeAreaView, ScrollView, Dimensions, ImageBackground  } from 'react-native';
 
+const { height, width } = Dimensions.get('window');
 const AboutCancer = () => {
   return (
     <>
     <SafeAreaView style={styles.container}>
+        <ImageBackground
+         source={require('../Images/backgroundNoStars.png')}
+         style={{
+             height: Dimensions.get('window').height,
+             width: Dimensions.get('window').width,
+             flex: 1,
+             resizeMode: 'cover',
+             resizeMode: 'stretch',
+             position: 'absolute'
+         }}
+        >
+
         <ScrollView style={styles.ScrollView}>
             <View>
             <Text style={styles.HeaderTxt}>Cancer</Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Symbol: </Text>
-                <Text> Crab </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Crab </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Element: </Text>
-                <Text> Water </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Water </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Ruling Planet: </Text>
-                <Text> Moon </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> Moon </Text>
             </View>
             <View style={styles.row1}>
                 <Text style={styles.element}>Birth Dates Range: </Text>
-                <Text> June 22nd - July 22nd </Text>
+                <Text style={{ fontFamily: 'Palatino' }}> June 22nd - July 22nd </Text>
             </View>
             
             <View style={styles.row1}>
@@ -45,11 +58,20 @@ const AboutCancer = () => {
                 <Text style={styles.paragraph}>
                 Cancer is a very sensitive sign, and they don’t always appreciate it when you are blunt with them. Their reactions to hurt will depend on how thick a shell they have developed. Most Cancers react by withdrawing or retreating. Some have developed an ability to manipulate others to get what they want. They avoid direct confrontations almost as a rule.
                 </Text>
-                <Text style={styles.paragraph}>
+                <Text 
+                style={{
+                    margin: 10,
+                    textAlign: 'center',
+                    fontFamily: 'Palatino',
+                    fontSize: 15,
+                    marginTop: 12,
+                    paddingBottom: 30,
+                    marginBottom: 12
+               }}
+                >
                 Cancers are, in fact, quite yielding and soft when you have them in the right mood. They are one of the more hospitable signs of the zodiac. Sure, they can be touchy and indirect, but they are also very dependable, caring souls.
                 </Text>
-                <View style={{ backgroundColor: "black", height: 1, marginTop: 20 }}>
-                    </View>
+              
 
                 {/* MOON SIGN */}
                     {/* <View>
@@ -66,6 +88,7 @@ const AboutCancer = () => {
                     </View> */}
             </View>
         </ScrollView>
+        </ImageBackground>
     </SafeAreaView>
     </>
   )
@@ -76,12 +99,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:'center'
     },
-    ScrollView: {
-        backgroundColor: 'rgb(184, 181, 255)'
-    },
     HeaderTxt:{
         fontSize:50,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 50,
+        fontFamily: 'Palatino-Bold'
     },
     row1: {
         marginTop: 3,
@@ -89,17 +111,21 @@ const styles = StyleSheet.create({
        flexDirection:'row'
     },
     element: {
-        fontWeight: 'bold'
+        fontFamily: 'Palatino-Bold'
     },
     paragraph: {
         margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Palatino',
+        fontSize: 15,
+        marginTop: 12
     },
     subHeader: {
         marginTop: 10,
         marginLeft: 100,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily: 'Palatino-Bold'
     }
 })
 export default AboutCancer

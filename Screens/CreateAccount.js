@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, SafeAreaView, Pressable, Alert } from 'react-native';
+import { KeyboardAvoidingView, TouchableWithoutFeedback, ScrollView, StyleSheet, Text, View, Image, TextInput, SafeAreaView, ImageBackground, Dimensions, Pressable, Alert } from 'react-native';
 
+
+const { height, width } = Dimensions.get('window');
 const CreateAccount = ({ navigation }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [userId, setUserId] = useState(0);
-    
+
     // const handleCreate = async () => {
 
     //     await fetch("http://localhost:5098/User/AddUser", {
@@ -33,7 +35,7 @@ const CreateAccount = ({ navigation }) => {
     //             })
 
     const handleCreate = async () => {
-        if(username == "" || password == ""){
+        if (username == "" || password == "") {
             Alert.alert("Error invalid credentials!");
         } else {
             fetch('https://backend-api-test-ea.azurewebsites.net/User/AddUser', {
@@ -42,7 +44,7 @@ const CreateAccount = ({ navigation }) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "id":0,
+                    "id": 0,
                     "Username": username,
                     "Password": password
                 })
@@ -57,44 +59,76 @@ const CreateAccount = ({ navigation }) => {
                         Alert.alert("Error Username already exists.  Please try a different Username.");
                     }
                 })
-        }           
+        }
     }
 
     return (
         <>
-            <View style={styles.container}>
-                <Image style={styles.StarbornLogo} source={require('../Images/StarBorn.png')} />
+            <SafeAreaView style={styles.container}>
+                <ImageBackground source={require('../Images/backgroundLessV.png')}
+                    style={{
+                        height: Dimensions.get('window').height,
+                        width: Dimensions.get('window').width,
+                        flex: 1,
+                        resizeMode: 'cover',
+                        resizeMode: 'stretch',
+                        position: 'absolute'
 
+                    }}
 
-                <SafeAreaView style={styles.login}>
-                    <Text style={styles.loginHeader}>Create Account</Text>
-                    <Text style={styles.txtStyle}>Username</Text>
-                    <TextInput
-                        style={styles.inputs}
-                        placeholder="Enter Username"
-                        value={username}
-                        onChangeText={setUsername}
-                    />
-                    <Text style={styles.txtStyle}>Password</Text>
-                    <TextInput
-                        style={styles.inputs}
-                        placeholder="Enter Password"
-                        value={password}
-                        onChangeText={setPassword}
-                    />
-                    <Pressable style={({ pressed }) => [styles.btn, {
-                        opacity: pressed ? .5 : 1
-                    }]}
-                        onPress={handleCreate}
+                >
+                    <KeyboardAvoidingView style={{
+                        flex: 1,
+                        width: Dimensions.get('window').width,
+                        paddingHorizontal: 20
+                    }}
                     >
-                        <Text style={{ color: "white", fontWeight: 'bold' }}>Create Account</Text>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Login')}>
-                        <Text style={styles.createAcc}>
-                            Already Have An Account? Login!</Text>
-                    </Pressable>
-                </SafeAreaView>
-            </View>
+                        <ScrollView>
+                            <Image style={{
+                                height: 150,
+                                width: 300,
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignSelf: 'center',
+                                margin: 10,
+                                marginTop: 100
+                            }} source={require('../Images/StarBornLogo.png')} />
+
+                            <TouchableWithoutFeedback>
+
+                                <View style={styles.login}>
+                                    <Text style={styles.loginHeader}>Create Account</Text>
+                                    <Text style={styles.txtStyle}>Username</Text>
+                                    <TextInput
+                                        style={styles.inputs}
+                                        placeholder="Enter Username"
+                                        value={username}
+                                        onChangeText={setUsername}
+                                    />
+                                    <Text style={styles.txtStyle}>Password</Text>
+                                    <TextInput
+                                        style={styles.inputs}
+                                        placeholder="Enter Password"
+                                        value={password}
+                                        onChangeText={setPassword}
+                                    />
+                                    <Pressable style={({ pressed }) => [styles.btn, {
+                                        opacity: pressed ? .5 : 1
+                                    }]}
+                                        onPress={handleCreate}
+                                    >
+                                        <Text style={{ color: "white", fontWeight: 'bold' }}>Create Account</Text>
+                                    </Pressable>
+                                    <Pressable onPress={() => navigation.navigate('Login')}>
+                                        <Text style={styles.createAcc}>
+                                            Already Have An Account? Login!</Text>
+                                    </Pressable>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </ScrollView>
+                    </KeyboardAvoidingView>
+                </ImageBackground>
+            </SafeAreaView>
         </>
     )
 }
