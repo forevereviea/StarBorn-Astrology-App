@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 //import { useIsFocused } from '@react-navigation/native';
-import { StyleSheet, ImageBackground, Dimensions, Alert, Text, View, Image, Modal, Button, Pressable, TextInput, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import { RefreshControl, StyleSheet, ImageBackground, Dimensions, Alert, Text, View, Image, Modal, Button, Pressable, TextInput, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import trash from '../Images/trash.png';
 import arrow from '../Images/arrowLeftBk.png';
 // import ChartContext from '../Context/ChartContext';
 
 const { height, width } = Dimensions.get('window');
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
 const BirthCharts = ({ navigation }) => {
     // const { counter } = useContext(ChartContext);
     const [userInputs, setUserInputs] = useState([]);
@@ -22,10 +25,15 @@ const BirthCharts = ({ navigation }) => {
     const [neptuneSign, setNeptuneSign] = useState('');
     const [plutoSign, setPlutoSign] = useState('');
     const [ascendantSign, setAscendantSign] = useState('');
-    //const isFocused = useIsFocused();
 
-    // Context
+    // Refreshing
+    const [refreshing, setRefreshing] = React.useState(false);
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        getUsersChart();
+        wait(2000).then(() => setRefreshing(false));
+      }, []);
 
     const getUsersChart = async () => {
         let SaltHashId = await AsyncStorage.getItem('SaltHashId');
@@ -34,30 +42,16 @@ const BirthCharts = ({ navigation }) => {
             userInputs = [];
         } else {
             userInputs = JSON.parse(userInputs);
-            console.log(userInputs);
         }
 
         setUserInputs(userInputs);
-        // console.log(userInputs);
     }
-    // const data = ["day", "hour", "lat", "lon", "min", "month", "tzone", "year"]
+
 
     useEffect(() => {
         getUsersChart();
 
     }, []);
-    //   UseContext useEffect
-    // useEffect(() => {
-    //     getUsersChart();
-
-    //   }, [counter]);
-
-    //   useFocusEffect(
-    //     useCallback(() => {
-    //       //Below alert will fire every time when profile screen is focused
-    //         alert('Hi from profile');
-    //     }, [])
-    //   );
 
     const getPlanets = async (day, month, year, hour, min, lat, lon, tzone) => {
         await fetch("https://json.astrologyapi.com/v1/planets/tropical", {
@@ -116,33 +110,10 @@ const BirthCharts = ({ navigation }) => {
                         setAscendantSign(data[i].sign);
                     }
                 }
-                //console.log(data);
             })
 
-        // console.log(day);
-        // console.log(month);
-        // console.log(year);
-        // console.log(hour);
-        // console.log(min);
-        // console.log(lat);
-        // console.log(lon);
     }
 
-    // const removeByName = (userInputs, name) => {
-    //     const requiredIndex = userInputs.removeItem(el => {
-    //        return el.name === String(name);
-    //     });
-    //     if(requiredIndex === -1){
-    //        return false;
-    //     };
-    //     userInputs = !!userInputs.splice(requiredIndex, 1);
-    //     setUserInputs(userInputs);
-    //     console.log(userInputs);
-    //  }
-
-    // const removeByName = () => {
-    //     console.log("deleteing");
-    // }
 
     const removeData = async (id, SaltHashId) => {
         await fetch("https://backend-api-test-ea.azurewebsites.net/BirthChart/RemoveBirthChart/" + id, {
@@ -175,6 +146,15 @@ const BirthCharts = ({ navigation }) => {
     return (
         <>
             <SafeAreaView style={styles.container}>
+                {/* <ScrollView
+                        contentContainerStyle={{ flex: 1, justifyContent: 'center' }}
+                        refreshControl={
+                          <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                          />
+                        }
+                > */}
                 <ImageBackground
                     source={require('../Images/backgroundLessV.png')}
                     style={{
@@ -187,7 +167,15 @@ const BirthCharts = ({ navigation }) => {
                     }}
                 >
 
-                    <ScrollView style={styles.ScrollView}>
+                    <ScrollView 
+                     contentContainerStyle={{ flex: 1 }}
+                     refreshControl={
+                       <RefreshControl
+                         refreshing={refreshing}
+                         onRefresh={onRefresh}
+                       />
+                     }
+                    >
                         <View style={styles.BCView}>
                             <Text style={styles.BirthChartTxt}>Birth Charts</Text>
                         </View>

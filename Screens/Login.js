@@ -41,7 +41,7 @@ const Login = ({ navigation }) => {
                         }).then(resp1 => resp1.json())
                         .then(data1 => {
                             AsyncStorage.getItem("SaltHashId").then((value) => {
-                                console.log(value);
+                                // console.log(value);
                                 AsyncStorage.setItem(value, JSON.stringify(data1));
                                 navigation.navigate('Home');
                             })
@@ -51,22 +51,11 @@ const Login = ({ navigation }) => {
                         })
                 } else {
                     Alert.alert("Invalid Username or Password, Try Again");
-                    //navigation.navigate("MainMenu");
                 }
-                //             console.log(data.token)
-                // console.log(username);
-                // console.log(password);
 
             })
     }
 
-
-    // const storeData = async () => {
-    //     let oldUsers = await AsyncStorage.setItem('oldUsers');
-    //     if(oldUsers == null) {
-    //         oldUsers = [];
-    //     }
-    //   }
     return (
         <>
             <SafeAreaView style={styles.container}>

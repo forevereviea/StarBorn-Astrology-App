@@ -65,13 +65,6 @@ const CreateBirthChart = ({ navigation }) => {
                 setLat(data.locations[0].referencePosition.latitude);
                 setLon(data.locations[0].referencePosition.longitude);
                 setTzone(-7);
-                // console.log('lat: ', data.locations[0].referencePosition.latitude);
-                // console.log('lon: ', data.locations[0].referencePosition.longitude);
-                // console.log('day: ', date.getDate());
-                // console.log('month: ', date.getMonth()+1);
-                // console.log('year: ', date.getFullYear());
-                // console.log('hour: ', time.getHours());
-                // console.log('min: ', time.getMinutes());
                 getNatalWheel(date.getDate(), date.getMonth() + 1, date.getFullYear(), time.getHours(), time.getMinutes(), data.locations[0].referencePosition.latitude, data.locations[0].referencePosition.longitude, -7);
                 getPlanets(
                     date.getDate(), date.getMonth() + 1, date.getFullYear(), time.getHours(), time.getMinutes(), data.locations[0].referencePosition.latitude, data.locations[0].referencePosition.longitude, -7);
@@ -101,15 +94,6 @@ const CreateBirthChart = ({ navigation }) => {
                 setChart(data.chart_url)
                 setModalVisible(true);
             })
-
-        // console.log(day);
-        // console.log(month);
-        // console.log(year);
-        // console.log(hour);
-        // console.log(min);
-        // console.log(lat);
-        // console.log(lon);
-        // console.log(chart);
     }
 
     const getPlanets = async (day, month, year, hour, min, lat, lon, tzone) => {
@@ -170,29 +154,14 @@ const CreateBirthChart = ({ navigation }) => {
                     }
                 }
 
-                //console.log(data);
             })
-
-        // console.log(day);
-        // console.log(month);
-        // console.log(year);
-        // console.log(hour);
-        // console.log(min);
-        // console.log(lat);
-        // console.log(lon);
     }
 
-    // const generateWheel = () => {
-    //     getNatalWheel();
-    //     getPlanets();
-    // }
 
     const pressedBtn = () => {
         getNatalWheel();
         getBirthPlace();
         getPlanets();
-        // console.log(date.toLocaleDateString('en-US'));
-        // console.log(formatAMPM(time));
     }
 
     const onChangeTextInput = () => {
@@ -244,17 +213,12 @@ const CreateBirthChart = ({ navigation }) => {
                 AsyncStorage.setItem(SaltHashId.toString(), JSON.stringify(userInputs));
             }
         })
-        // userInputs.push(inputs);
-        // await AsyncStorage.setItem(username, JSON.stringify(userInputs));
     }
 
     clearAsyncStorage = async () => {
         AsyncStorage.clear();
     }
 
-    const check = () => {
-        console.log("Is this working");
-    }
     return (
         <>
             <SafeAreaView style={styles.container}>
