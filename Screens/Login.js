@@ -24,13 +24,31 @@ const Login = ({ navigation }) => {
                 "Username": username,
                 "Password": password
             })
-        })
-            .then(resp => resp.json())
-            .then(data => {
+        }).then(resp => resp.json())
+          .then(data => {
                 if (data.token != null) {
-                    AsyncStorage.setItem('username', username);
-                    navigation.navigate('Home');
+                    
+                    AsyncStorage.setItem('SaltHashId', data.id.toString());
+
+
                     Alert.alert("Welcome Back User: " + username);
+                    
+                    fetch("https://backend-api-test-ea.azurewebsites.net/BirthChart/GetBirthCharts/" + data.id, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                        }).then(resp1 => resp1.json())
+                        .then(data1 => {
+                            AsyncStorage.getItem("SaltHashId").then((value) => {
+                                console.log(value);
+                                AsyncStorage.setItem(value, JSON.stringify(data1));
+                                navigation.navigate('Home');
+                            })
+                            .then(res => {
+                                //do something else
+                            });
+                        })
                 } else {
                     Alert.alert("Invalid Username or Password, Try Again");
                     //navigation.navigate("MainMenu");
@@ -41,6 +59,7 @@ const Login = ({ navigation }) => {
 
             })
     }
+
 
     // const storeData = async () => {
     //     let oldUsers = await AsyncStorage.setItem('oldUsers');

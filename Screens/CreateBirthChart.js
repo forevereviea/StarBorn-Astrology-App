@@ -208,16 +208,19 @@ const CreateBirthChart = ({ navigation }) => {
     }
     // local storage saving user
     const saveUserInputs = async () => {
+        var SaltHashId = await AsyncStorage.getItem("SaltHashId");
         // await clearAsyncStorage();
-        let username = await AsyncStorage.getItem('username');
-        let userInputs = await AsyncStorage.getItem(username);
+        let userInputs = await AsyncStorage.getItem(SaltHashId.toString());
         if (userInputs == null) {
             userInputs = [];
         } else {
             userInputs = JSON.parse(userInputs);
         }
+        
         let inputs = {
-            name,
+            "id": 0,
+            "SaltHashId": parseInt(SaltHashId),
+            "name": name,
             "day": day,
             "month": month,
             "year": year,
@@ -227,8 +230,22 @@ const CreateBirthChart = ({ navigation }) => {
             "lon": lon,
             "tzone": tzone
         };
-        userInputs.push(inputs);
-        await AsyncStorage.setItem(username, JSON.stringify(userInputs));
+
+        await fetch("https://backend-api-test-ea.azurewebsites.net/BirthChart/AddBirthChart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(inputs)
+        }).then(resp => resp.json())
+          .then(data => {
+            if (data) {
+                userInputs.push(inputs);
+                AsyncStorage.setItem(SaltHashId.toString(), JSON.stringify(userInputs));
+            }
+        })
+        // userInputs.push(inputs);
+        // await AsyncStorage.setItem(username, JSON.stringify(userInputs));
     }
 
     clearAsyncStorage = async () => {

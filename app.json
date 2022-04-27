@@ -4,6 +4,7 @@
     "slug": "starborn-astrology-4",
     "version": "1.0.0",
     "orientation": "portrait",
+    "privacy": "unlisted",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -24,10 +25,13 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.evie.arg.starbornastrology4"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/forevereviea/starborn-astrology-4-UserDeletesBCCommit.git"
   }
 }

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Animated, StyleSheet, Text, Dimensions, View, Button, Image, Pressable, ScrollView, SafeAreaView, ImageBackground, TouchableOpacity } from 'react-native';
 import menu from '../Images/menu.png';
+import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 const Home = ({ navigation }) => {
@@ -20,13 +21,14 @@ const Home = ({ navigation }) => {
 
                 <ScrollView>
                     <View style={{ flexDirection: 'row'}}>
-                    {/* <TouchableOpacity 
-                    onPress={() => navigation.navigate('SideMenu')
-                
+                    <TouchableOpacity 
+                    onPress={() => {
+                    navigation.navigate('SideMenu');
+                }
                 }
                     >
                     <Image source={menu} style={{ display: 'flex', width: 30, height: 30, padding: 15, marginLeft: 20, marginTop: 30}}/>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                     </View>
                     <View style={styles.buttons}>
 
@@ -67,8 +69,7 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'rgb(184, 181, 255)'
+        justifyContent: 'center'
     },
     btn: {
         alignItems: 'center',

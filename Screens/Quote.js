@@ -37,7 +37,7 @@ const Quote = ({ navigation }) => {
                             justifyContent: 'flex-end',
                             zIndex: 1,
                             padding: 60,
-                            marginTop: 600,
+                            marginTop: 400,
                             marginLeft: 60
                         }}
                         onPress={() => navigation.navigate('WhatIsAstrology')}

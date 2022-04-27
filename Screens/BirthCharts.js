@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 //import { useIsFocused } from '@react-navigation/native';
 import { StyleSheet, ImageBackground, Dimensions, Alert, Text, View, Image, Modal, Button, Pressable, TextInput, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import trash from '../Images/trash.png';
 import arrow from '../Images/arrowLeftBk.png';
+// import ChartContext from '../Context/ChartContext';
 
 const { height, width } = Dimensions.get('window');
 const BirthCharts = ({ navigation }) => {
-
+    // const { counter } = useContext(ChartContext);
     const [userInputs, setUserInputs] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [sunSign, setSunSign] = useState('');
@@ -23,13 +24,17 @@ const BirthCharts = ({ navigation }) => {
     const [ascendantSign, setAscendantSign] = useState('');
     //const isFocused = useIsFocused();
 
+    // Context
+
+
     const getUsersChart = async () => {
-        let username = await AsyncStorage.getItem('username');
-        let userInputs = await AsyncStorage.getItem(username);
+        let SaltHashId = await AsyncStorage.getItem('SaltHashId');
+        let userInputs = await AsyncStorage.getItem(SaltHashId);
         if (userInputs == null) {
             userInputs = [];
         } else {
             userInputs = JSON.parse(userInputs);
+            console.log(userInputs);
         }
 
         setUserInputs(userInputs);
@@ -39,7 +44,13 @@ const BirthCharts = ({ navigation }) => {
 
     useEffect(() => {
         getUsersChart();
-      }, []);
+
+    }, []);
+    //   UseContext useEffect
+    // useEffect(() => {
+    //     getUsersChart();
+
+    //   }, [counter]);
 
     //   useFocusEffect(
     //     useCallback(() => {
@@ -49,7 +60,6 @@ const BirthCharts = ({ navigation }) => {
     //   );
 
     const getPlanets = async (day, month, year, hour, min, lat, lon, tzone) => {
-
         await fetch("https://json.astrologyapi.com/v1/planets/tropical", {
             method: "POST",
             headers: {
@@ -134,15 +144,27 @@ const BirthCharts = ({ navigation }) => {
     //     console.log("deleteing");
     // }
 
-    const removeData = async (name) => {
-        let username = await AsyncStorage.getItem('username');
-        let inputs = await AsyncStorage.getItem(username);
-        let userInputs = JSON.parse(inputs);
-        const newUserInputs = userInputs.filter(function (e) { return e.name !== name });
-        // userInputs = !!userInputs.splice(requiredIndex, 1);
-        await AsyncStorage.setItem(username, JSON.stringify(newUserInputs));
-        setUserInputs(newUserInputs);
-        // console.log(newUserInputs);
+    const removeData = async (id, SaltHashId) => {
+        await fetch("https://backend-api-test-ea.azurewebsites.net/BirthChart/RemoveBirthChart/" + id, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                if (data) {
+                    AsyncStorage.getItem(SaltHashId.toString()).then((inputs) => {
+                        let userInputs = JSON.parse(inputs);
+                        const newUserInputs = userInputs.filter(function (e) { return e.id !== id });
+                        AsyncStorage.setItem(SaltHashId.toString(), JSON.stringify(newUserInputs));
+                        setUserInputs(newUserInputs);
+                    })
+                    .then(res => {
+                        //do something else
+                    });
+                }
+            })
     }
 
     const pressedBtn = (item) => {
@@ -217,108 +239,108 @@ const BirthCharts = ({ navigation }) => {
                                                         <View style={styles.centeredView}>
 
                                                             <View style={styles.modalView}>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <TouchableOpacity style={{ justifyContent: 'flex-end'}}
-                                                                                     onPress={() => setModalVisible(!modalVisible)}
-                                                                                >
-                                                                                    <Image source={arrow}
-                                                                                    style={{
-                                                                                        height:20,
-                                                                                        width:20,
-            
-                                                                                    }} />
-                                                                                </TouchableOpacity>
-                                                                                <View style={{ width: 260 }}></View>
-                                                                                <TouchableOpacity
-                                                                                        onPress={() => {
-                                                                                            removeData(item.name);
-                                                                                            setModalVisible(!modalVisible);
-                                                                                            Alert.alert("Birth Chart has been deleted!");
-                                                                                        }}
-                                                                                    >
-                                                                                        {/* <Text style={styles.textStyle}>Delete Chart</Text> */}
-                                                                                        <Image source={trash} style={{
-                                                                                            height: 20,
-                                                                                            width: 20,
-                                                                                            // marginRight: 60,
-                                                                                            justifyContent: 'flex-end'
-                                                                                        }} />
-                                                                                    </TouchableOpacity>
-                                                                            </View>
-                                                                            <ScrollView>
-                                                                        <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', justifyContent: 'space-between' }}>
-                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 25, marginBottom: 8, alignItems: 'center', justifyContent: 'center' }}>
-                                                                                {item.name}'s Birth Chart</Text>                                                         
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15, marginBottom: 5 }}>Your Ascendant is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', display: 'flex' }}>{ascendantSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Native's Self, Physical, Character, Appearance</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Sun is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{sunSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Ego, Basic Personality, Consciousness, Vitality, Stamina</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Moon is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{moonSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Unconsciousness, Emotions, Instincts, Habits, Moods</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Mercury is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{mercurySign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Mindful, Commuication, Intellect, Language, Intelligence</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Venus is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{venusSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Attraction, Love, Relationships, Art, Beauty, Harmony</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Mars is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{marsSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Aggression, Sex, Action, Competition, Courage, Passion</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Jupiter is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{jupiterSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Luck, Growth, Expansion, Optimism, Abundance</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Saturn is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{saturnSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Structure, Law, Responsibility, Ambition, Obligation</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Uranus is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{uranusSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Eccentricity, Unpredictable, Changes, Rebellion, Reformation</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Neptune is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{neptuneSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Dreams, Intuition, Mysticism, Imagination, Delusion</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Pluto is in: </Text>
-                                                                                <Text style={{ fontFamily: 'Palatino-Bold' }}>{plutoSign}</Text>
-                                                                            </View>
-                                                                            <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
-                                                                            <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Transformation, Power, Death, Rebirth, Evolution</Text>
-                                                                            <View style={{ flexDirection: 'row' }}>
-                                                                            </View>
+                                                                <View style={{ flexDirection: 'row' }}>
+                                                                    <TouchableOpacity style={{ justifyContent: 'flex-end' }}
+                                                                        onPress={() => setModalVisible(!modalVisible)}
+                                                                    >
+                                                                        <Image source={arrow}
+                                                                            style={{
+                                                                                height: 20,
+                                                                                width: 20,
+
+                                                                            }} />
+                                                                    </TouchableOpacity>
+                                                                    <View style={{ width: 260 }}></View>
+                                                                    <TouchableOpacity
+                                                                        onPress={() => {
+                                                                            removeData(item.id, item.saltHashId);
+                                                                            setModalVisible(!modalVisible);
+                                                                            Alert.alert("Birth Chart has been deleted!");
+                                                                        }}
+                                                                    >
+                                                                        {/* <Text style={styles.textStyle}>Delete Chart</Text> */}
+                                                                        <Image source={trash} style={{
+                                                                            height: 20,
+                                                                            width: 20,
+                                                                            // marginRight: 60,
+                                                                            justifyContent: 'flex-end'
+                                                                        }} />
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                                <ScrollView>
+                                                                    <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', justifyContent: 'space-between' }}>
+                                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 25, marginBottom: 8, alignItems: 'center', justifyContent: 'center' }}>
+                                                                            {item.name}'s Birth Chart</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15, marginBottom: 5 }}>Your Ascendant is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', display: 'flex' }}>{ascendantSign}</Text>
                                                                         </View>
-                                                                    </ScrollView>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Native's Self, Physical, Character, Appearance</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Sun is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{sunSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Ego, Basic Personality, Consciousness, Vitality, Stamina</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Moon is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{moonSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Unconsciousness, Emotions, Instincts, Habits, Moods</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Mercury is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{mercurySign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Mindful, Commuication, Intellect, Language, Intelligence</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Venus is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{venusSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Attraction, Love, Relationships, Art, Beauty, Harmony</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Mars is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{marsSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Aggression, Sex, Action, Competition, Courage, Passion</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Jupiter is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{jupiterSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Luck, Growth, Expansion, Optimism, Abundance</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Saturn is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{saturnSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Structure, Law, Responsibility, Ambition, Obligation</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Uranus is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{uranusSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Eccentricity, Unpredictable, Changes, Rebellion, Reformation</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Neptune is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{neptuneSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Dreams, Intuition, Mysticism, Imagination, Delusion</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15 }}>Your Pluto is in: </Text>
+                                                                            <Text style={{ fontFamily: 'Palatino-Bold' }}>{plutoSign}</Text>
+                                                                        </View>
+                                                                        <Text style={{ fontFamily: 'Palatino-Italic' }}>Symbolizes</Text>
+                                                                        <Text style={{ fontFamily: 'Palatino', fontSize: 10 }}>Transformation, Power, Death, Rebirth, Evolution</Text>
+                                                                        <View style={{ flexDirection: 'row' }}>
+                                                                        </View>
+                                                                    </View>
+                                                                </ScrollView>
                                                                 {/* </ImageBackground> */}
                                                                 {/* this one */}
                                                             </View>

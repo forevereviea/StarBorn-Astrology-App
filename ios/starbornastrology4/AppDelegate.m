@@ -6,6 +6,7 @@
 
 #if defined(EX_DEV_LAUNCHER_ENABLED)
 #include <EXDevLauncher/EXDevLauncherController.h>
+#import <EXUpdates/EXUpdatesDevLauncherController.h>
 #endif
 
 #import <React/RCTBridge.h>
@@ -58,6 +59,7 @@ static void InitializeFlipper(UIApplication *application) {
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 #if defined(EX_DEV_LAUNCHER_ENABLED)
   EXDevLauncherController *controller = [EXDevLauncherController sharedInstance];
+        controller.updatesInterface = [EXUpdatesDevLauncherController sharedInstance];
   [controller startWithWindow:self.window delegate:(id<EXDevLauncherControllerDelegate>)self launchOptions:launchOptions];
 #else
   [self initializeReactNativeApp:launchOptions];
