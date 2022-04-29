@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { KeyboardAvoidingView, TouchableWithoutFeedback, ImageBackground, Dimensions, StyleSheet, Text, Button, View, Image, TextInput, ScrollView, SafeAreaView, Pressable, Alert, Keyboard } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import logo from '../Images/StarBornLogo.png';
 import background from '../Images/backgroundLessV.png';
+import DashBoard from './DashBoard';
 
 const {height, width} = Dimensions.get('window');
 
@@ -43,7 +44,9 @@ const Login = ({ navigation }) => {
                             AsyncStorage.getItem("SaltHashId").then((value) => {
                                 // console.log(value);
                                 AsyncStorage.setItem(value, JSON.stringify(data1));
-                                navigation.navigate('Home');
+                                setUsername('');
+                                setPassword('');
+                                navigation.navigate('DashBoard');
                             })
                             .then(res => {
                                 //do something else
@@ -56,6 +59,9 @@ const Login = ({ navigation }) => {
             })
     }
 
+    // useEffect(() => {
+    //    console.log('clear Input');
+    // }, []);
     return (
         <>
             <SafeAreaView style={styles.container}>
@@ -99,6 +105,7 @@ const Login = ({ navigation }) => {
                             <Text style={styles.txtStyle}>Password</Text>
                             <TextInput
                                 style={styles.inputs}
+                                secureTextEntry={true}
                                 placeholder="Enter Password"
                                 value={password}
                                 onChangeText={setPassword}
@@ -106,7 +113,10 @@ const Login = ({ navigation }) => {
                             <Pressable style={({ pressed }) => [styles.btn, {
                                 opacity: pressed ? .5 : 1
                             }]}
-                                onPress={handleLogin}
+                                // onPress={handleLogin}
+                                onPress={()=> {
+                                    handleLogin();
+                                }}
                             >
                                 <Text style={{ color: "white", fontWeight: 'bold' }}>Login</Text>
                             </Pressable>

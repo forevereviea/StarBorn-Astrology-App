@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, ImageBackground } from 'react-native';
-import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+ import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -31,18 +31,19 @@ import Sag from './AboutSigns/AboutSag';
 import Capricorn from './AboutSigns/AboutCapricorn';
 import Aquarius from './AboutSigns/AboutAquarius';
 import Pisces from './AboutSigns/AboutPisces';
+import DashBoard from './Screens/DashBoard';
 
 // import { faUser } from '@fortawesome/free-solid-svg-icons';
 // import * as SplashScreen from 'expo-splash-screen';
 import * as ErrorRecovery from 'expo-error-recovery';
 const Stack = createNativeStackNavigator();
-
+const Drawer = createDrawerNavigator();
 export default function App() {
   return (
     <>
       <ChartProvider>
         <NavigationContainer>
-          <Stack.Navigator headerMode={false}>
+           <Stack.Navigator headerMode={false}>
             <Stack.Screen
               name="Login"
               component={Login}
@@ -53,10 +54,27 @@ export default function App() {
             <Stack.Screen
               name="CreateAccount"
               component={CreateAccount}
+              options={{
+                headerShown: false,
+              }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
+              name="DrawerHome"
+              component={DrawerHome}
+              options={{ headerShown: false }}
+            /> */}
+             <Stack.Screen
+              name="DashBoard"
+              component={DashBoard}
+              options={{
+                headerShown: false,
+              }}
+            /> 
+             <Stack.Screen
               name="Home"
               component={Home}
+              // options={{ headerShown:
+              // }}
             />
             <Stack.Screen
               name="Quote"
@@ -69,6 +87,9 @@ export default function App() {
             <Stack.Screen
               name="AboutPlanets"
               component={AboutPlanets}
+              options={{
+                headerShown: false,
+              }}
             />
             <Stack.Screen
               name="BirthCharts"
@@ -78,13 +99,15 @@ export default function App() {
             <Stack.Screen
               name="CreateBirthChart"
               component={CreateBirthChart}
-              options={{ title: 'Create A Birth Chart' }}
+              options={{
+                title: 'Create A Birth Chart', headerTintColor: "white"
+              }}
             />
             <Stack.Screen
               name="ZodiacSigns"
               component={ZodiacSigns}
               options={{ title: 'All Zodiac Signs' }}
-            />
+            /> 
 
             {/* About Zodiac Signs Pages */}
             <Stack.Screen
@@ -135,13 +158,25 @@ export default function App() {
               name="Pisces"
               component={Pisces}
             />
-          </Stack.Navigator>
+          </Stack.Navigator> 
         </NavigationContainer>
       </ChartProvider>
     </>
   );
 }
-
+// const DrawerHome = () => {
+//   <Drawer.Navigator initialRouteName="Home">
+//     <Drawer.Screen name="Home Screen" component={Home}
+//       options={{
+//         headerTintColor: "white",
+//         headerStyle: {
+//           backgroundColor: 'black',
+//           opacity: .7
+//         }
+//       }} />
+//     <Drawer.Screen name="AboutPlanets" component={AboutPlanets} />
+//   </Drawer.Navigator>
+// }
 
 const styles = StyleSheet.create({
   container: {

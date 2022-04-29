@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Dimensions, ImageBackground, TouchableOpacity, Text, View, Image, TextInput, ScrollView, SafeAreaView, Pressable, Alert } from 'react-native';
+import WhatIsAstrology from './WhatIsAstrology';
+import Dashboard from './DashBoard';
 
 const { height, width } = Dimensions.get('window');
 const AboutPlanets = ({ navigation }) => {
@@ -93,7 +95,7 @@ const AboutPlanets = ({ navigation }) => {
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
         <TouchableOpacity
-                        onPress={() => navigation.navigate('WhatIsAstrology')}
+                        onPress={() => navigation.navigate('Home')}
                     >
                         <Image style={{
                        height: 50,

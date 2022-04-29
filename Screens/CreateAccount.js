@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, TouchableWithoutFeedback, ScrollView, StyleSheet, Text, View, Image, TextInput, SafeAreaView, ImageBackground, Dimensions, Pressable, Alert } from 'react-native';
-
+import Login from './Login';
+import WhatIsAstrology from './WhatIsAstrology';
+import DashBoard from './DashBoard';
 
 const { height, width } = Dimensions.get('window');
 const CreateAccount = ({ navigation }) => {
@@ -54,7 +56,7 @@ const CreateAccount = ({ navigation }) => {
                     if (data.id > 0) {
                         setUserId(data.id)
                         Alert.alert("Welcome to the StarBorn Astrology App!");
-                        navigation.navigate('Quote');
+                        navigation.navigate('DashBoard');
                     } else {
                         Alert.alert("Error Username already exists.  Please try a different Username.");
                     }

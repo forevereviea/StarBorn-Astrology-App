@@ -2,6 +2,8 @@ import React from 'react';
 import { ImageBackground, TouchableOpacity, Dimensions, StyleSheet, Text, View, Image, TextInput, ScrollView, SafeAreaView, Pressable, Alert, TouchableOpacityComponent } from 'react-native';
 import arrow from '../Images/arrowLeft.png';
 const { height, width } = Dimensions.get('window');
+import Dashboard from './DashBoard';
+import Home from './Home';
 const Quote = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>

@@ -3,6 +3,7 @@ import { StyleSheet, Dimensions, ImageBackground, Text, View, Image, Alert, Moda
 import DatePicker from 'react-native-date-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import arrow from '../Images/arrowLeftBk.png';
+import BirthCharts from './BirthCharts';
 
 const { height, width } = Dimensions.get('window');
 const CreateBirthChart = ({ navigation }) => {

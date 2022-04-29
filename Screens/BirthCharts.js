@@ -257,8 +257,8 @@ const BirthCharts = ({ navigation }) => {
                                                                 </View>
                                                                 <ScrollView>
                                                                     <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center', alignSelf: 'center', justifyContent: 'space-between' }}>
-                                                                        <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 25, marginBottom: 8, alignItems: 'center', justifyContent: 'center' }}>
-                                                                            {item.name}'s Birth Chart</Text>
+                                                                        {/* <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 25, marginBottom: 8, alignItems: 'center', justifyContent: 'center' }}>
+                                                                            {item.name}'s Birth Chart</Text> */}
                                                                         <View style={{ flexDirection: 'row' }}>
                                                                             <Text style={{ fontFamily: 'Palatino-Bold', fontSize: 15, marginBottom: 5 }}>Your Ascendant is in: </Text>
                                                                             <Text style={{ fontFamily: 'Palatino-Bold', display: 'flex' }}>{ascendantSign}</Text>
